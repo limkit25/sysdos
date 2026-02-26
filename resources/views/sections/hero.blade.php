@@ -3,7 +3,7 @@
     $hasSliders = isset($sliders) && $sliders->count() > 0;
 @endphp
 
-<section id="hero" class="overflow-hidden pt-32 pb-20 bg-gradient relative">
+<section id="hero" class="overflow-hidden pt-32 pb-20 bg-surface relative">
     <!-- Modern Background Decoration -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-radial-glow z-0"></div>
     <div class="absolute top-[-10%] right-[-5%] w-96 h-96 bg-primary/10 rounded-full blur-[120px] z-0 animate-pulse">
