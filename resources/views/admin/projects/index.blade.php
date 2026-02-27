@@ -1,114 +1,160 @@
 @extends('admin.layout')
 
+@section('header_title', 'Kelola Proyek')
+
 @section('content')
-<div class="row">
-    <div class="col-md-12 col-lg-5">
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Tambah Project Baru</h3>
-            </div>
-            <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="card-body">
-                    <div class="form-group">
-                        <label>Judul Project</label>
-                        <input type="text" name="title" class="form-control" placeholder="Nama Project" required>
+    <div class="grid lg:grid-cols-12 gap-10" data-aos="fade-up">
+        <!-- Form Section -->
+        <div class="lg:col-span-5">
+            <div class="glass dark:glass-dark rounded-[2.5rem] p-8 border border-white/20 shadow-2xl sticky top-28">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-xl">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold m-0 tracking-tight text-gradient">Tambah Proyek</h3>
+                </div>
+
+                <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data"
+                    class="space-y-6">
+                    @csrf
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-slate-500 uppercase tracking-widest ml-1">Judul Proyek</label>
+                        <input type="text" name="title"
+                            class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-darkblue dark:text-white font-medium"
+                            placeholder="Nama Proyek Baru" required>
                     </div>
 
-                    <div class="form-group">
-                        <label>Teknologi (Tech Stack)</label>
-                        <input type="text" name="tech_stack" class="form-control" placeholder="Contoh: Laravel 12, MySQL, Bootstrap">
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-slate-500 uppercase tracking-widest ml-1">Teknologi (Tech
+                            Stack)</label>
+                        <input type="text" name="tech_stack"
+                            class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-darkblue dark:text-white font-medium"
+                            placeholder="Contoh: Laravel 12, Tailwind CSS, MySQL">
                     </div>
 
-                    <div class="form-group">
-                        <label>Deskripsi Singkat (Untuk Kartu Depan)</label>
-                        <textarea name="description" class="form-control" rows="3" placeholder="Ringkasan pendek..." required></textarea>
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-slate-500 uppercase tracking-widest ml-1">Deskripsi
+                            Singkat</label>
+                        <textarea name="description" rows="3"
+                            class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-darkblue dark:text-white font-medium resize-none"
+                            placeholder="Ringkasan pendek untuk kartu..." required></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label>Konten Lengkap / Studi Kasus</label>
-                        <textarea name="content" class="form-control summernote" required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Link Demo / Ujicoba (Opsional)</label>
-                        <input type="url" name="link" class="form-control" placeholder="https://...">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Gambar Project</label>
-                        <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="imgInput" required>
-                            <label class="custom-file-label" for="imgInput">Pilih Gambar...</label>
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-slate-500 uppercase tracking-widest ml-1">Konten
+                            Lengkap</label>
+                        <div class="rounded-2xl overflow-hidden border border-white/10">
+                            <textarea name="content" class="summernote" required></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <i class="fas fa-save mr-2"></i> Simpan Project
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-slate-500 uppercase tracking-widest ml-1">Link Demo
+                            (Opsional)</label>
+                        <input type="url" name="link"
+                            class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-darkblue dark:text-white font-medium"
+                            placeholder="https://...">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-slate-500 uppercase tracking-widest ml-1">Gambar
+                            Project</label>
+                        <div class="relative group cursor-pointer">
+                            <input type="file" name="image" id="imgInput"
+                                class="absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer" required>
+                            <div
+                                class="w-full px-5 py-8 bg-white/5 border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center gap-3 group-hover:bg-white/10 group-hover:border-primary/50 transition-all">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-slate-500 group-hover:text-primary"></i>
+                                <span id="fileNameDisplay" class="text-sm font-medium text-slate-500">Klik atau geser gambar
+                                    ke sini</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-5 bg-linear-to-r from-primary to-primary-dark text-white rounded-2xl font-extrabold shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
+                        <i class="fas fa-save text-lg"></i>
+                        <span>Simpan Proyek</span>
                     </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- List Section -->
+        <div class="lg:col-span-7">
+            <div class="glass dark:glass-dark rounded-[2.5rem] p-8 border border-white/20 shadow-2xl">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center text-xl">
+                            <i class="fas fa-list-ul"></i>
+                        </div>
+                        <h3 class="text-xl font-bold m-0 tracking-tight">Daftar Proyek</h3>
+                    </div>
+                    <span
+                        class="text-xs font-bold bg-white/5 border border-white/10 px-4 py-2 rounded-full text-slate-500 uppercase tracking-widest">
+                        {{ $projects->count() }} Data
+                    </span>
                 </div>
-            </form>
+
+                <div class="space-y-6">
+                    @foreach($projects as $project)
+                        <div
+                            class="group relative flex flex-col md:flex-row items-center gap-6 p-6 bg-white/5 rounded-3xl border border-white/5 hover:border-white/10 transition-all hover:bg-white/10">
+                            <!-- Image -->
+                            <div
+                                class="w-full md:w-32 aspect-video md:aspect-square flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border border-white/10">
+                                <img src="{{ asset('storage/' . $project->image) }}"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    alt="Project">
+                            </div>
+
+                            <!-- Info -->
+                            <div class="flex-1 text-center md:text-start min-w-0">
+                                <h4 class="text-lg font-bold text-darkblue dark:text-white mb-1 truncate">{{ $project->title }}
+                                </h4>
+                                <div class="flex flex-wrap justify-center md:justify-start gap-4 mb-3">
+                                    <span
+                                        class="text-[10px] font-bold text-primary uppercase tracking-widest flex items-center gap-1">
+                                        <i class="fas fa-code text-[8px]"></i>
+                                        {{ $project->tech_stack ?? '-' }}
+                                    </span>
+                                </div>
+                                <p class="text-sm text-slate-500 m-0 line-clamp-2 leading-relaxed">
+                                    {{ $project->description }}
+                                </p>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="flex md:flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <a href="{{ route('admin.projects.edit', $project->id) }}"
+                                    class="p-3 bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500 hover:text-white rounded-xl transition-all shadow-lg"
+                                    title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
+                                    onsubmit="return confirm('Yakin ingin menghapus proyek ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="p-3 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-xl transition-all shadow-lg"
+                                        title="Hapus">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-12 col-lg-7">
-        <div class="card card-outline card-info">
-            <div class="card-header">
-                <h3 class="card-title">Daftar Project</h3>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width: 80px">Gambar</th>
-                                <th>Info Project</th>
-                                <th class="text-center" style="width: 100px">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($projects as $project)
-                            <tr>
-                                <td>
-                                    <img src="{{ asset('storage/' . $project->image) }}" width="80" class="img-thumbnail rounded">
-                                </td>
-                                <td>
-                                    <strong>{{ $project->title }}</strong>
-                                    <br>
-                                    <small class="text-muted">
-                                        <i class="fas fa-code mr-1"></i> {{ $project->tech_stack ?? '-' }}
-                                    </small>
-                                    <br>
-                                    <small>{{ Str::limit($project->description, 50) }}</small>
-                                </td>
-                                <td class="text-center align-middle" style="white-space: nowrap;">
-                                    <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning btn-sm mr-1" title="Edit">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    document.querySelector('.custom-file-input').addEventListener('change', function(e){
-        var fileName = document.getElementById("imgInput").files[0].name;
-        var nextSibling = e.target.nextElementSibling
-        nextSibling.innerText = fileName
-    })
-</script>
+    <script>
+        // File upload display name
+        document.getElementById('imgInput').addEventListener('change', function (e) {
+            var fileName = this.files[0].name;
+            document.getElementById('fileNameDisplay').innerText = fileName;
+            document.getElementById('fileNameDisplay').classList.add('text-primary');
+        });
+    </script>
 @endsection

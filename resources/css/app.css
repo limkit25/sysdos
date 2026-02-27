@@ -58,6 +58,22 @@
     @apply bg-linear-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-darkmode dark:to-slate-900;
 }
 
+@utility nav-link-admin {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-white hover:bg-primary/80;
+}
+
+@utility nav-link-admin-active {
+    @apply text-white bg-linear-to-r from-primary to-accent shadow-lg shadow-primary/20;
+}
+
+@utility nav-link-admin {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-white hover:bg-primary/80;
+}
+
+@utility nav-link-admin-active {
+    @apply text-white bg-linear-to-r from-primary to-accent shadow-lg shadow-primary/20;
+}
+
 @layer base {
     html {
         scroll-behavior: smooth;
