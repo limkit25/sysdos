@@ -18,7 +18,10 @@ class SectionSeeder extends Seeder
         ];
 
         foreach ($sections as $sec) {
-            Section::create($sec);
+            Section::updateOrCreate(
+                ['key' => $sec['key']],
+                $sec
+            );
         }
     }
 }
